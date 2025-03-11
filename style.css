@@ -3,3 +3,49 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    width: 95%;
+    height: 95%;
+    display: flex;
+
+    background-color: aqua;
+}
+
+.barraLateral {
+    background-color: aquamarine;
+}
+
+.containerPrincipal {
+    background-color: brown;
+}
+
+.barraPesquisa {
+    background-color: black;
+}
+
+.barraPesquisa img {
+    height: 2rem;
+}
+
+.campoPesquisa {
+    border-radius: 50px;
+    background-color: gray;
+}
+
+.campoPesquisa input {
+    border: none;
+    background-color: gray;
+}
+
+.campoPesquisa input::placeholder {
+    color: white;
+}
