@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <script src="./main.js" defer></script>
     <title>MH WORLD API</title>
@@ -10,75 +13,88 @@
 <body>
     <main>
         <div class="barraLateral">
-            <h1>DATABASE/MHW</h1>
-            <h2>DATABASE</h2>
-            <a href="#">Monstros</a>
-            <a href="#">Armas</a>
-            <a href="#">Armaduras</a>
-        </div>
-        <div class="containerPrincipal">
-            <div class="barraPesquisa">
-                <div class="campoPesquisa">
-                    <img src="./img/lupa.png" alt="">
-                    <input type="text" placeholder="Pesquise algo...">
+            <div class="conteudoBarraLateral">
+                <h1>DATABASE/MHW</h1>
+                <div class="linksBarraLateral">
+                    <h2>DATABASE</h2>
+                    <a href="#">Monstros</a>
+                    <a href="#">Armas</a>
+                    <a href="#">Armaduras</a>
                 </div>
             </div>
-            <div class="homeContainer">
-                <h1>MONSTER HUNTER: WORLD</h1>
-                <div class="exemploNomes">
-                    <div class="exemploMonstros">
-                        <h1>Monstros</h1>
-                        <hr>
-                        <h2>Exemplos:</h2>
-                        <div class="nomes">
-                            <span>Rathalos</span>
-                            <span>Kushala-Daora</span>
-                            <span>Pukei-Pukei</span>
-                            <span>Barroth</span>
-                            <span>Tobi-Kadachi</span>
-                            <span>Zinogre</span>
-                            <span>Odogaron</span>
-                            <span>Great Jagras</span>
-                            <span>Deviljho</span>
-                            <span>Diablos</span>
+        </div>
+        <div class="containerPrincipal">
+            <div class="campoPesquisa">
+                <div class="campoDigitacao">
+                    <input type="text" placeholder="Pesquise algo...">
+                    <a href="#">
+                        <img src="./img/lupa.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="homeContainer" id="homeContainer">
+                <div class="conteudoHomeContainer">
+                    <h1>MONSTER HUNTER: WORLD</h1>
+                    <div class="exemploNomes">
+                        <div class="exemplo">
+                            <div class="tituloExemplos">
+                                <h1>Monstros</h1>
+                                <hr>
+                            </div>
+                            <h2>Exemplos:</h2>
+                            <div class="nomes">
+                                    <span>Rathalos</span>
+                                    <span>Kushala-Daora</span>
+                                    <span>Pukei-Pukei</span>
+                                    <span>Barroth</span>
+                                    <span>Tobi-Kadachi</span>
+                                    <span>Zinogre</span>
+                                    <span>Odogaron</span>
+                                    <span>Great Jagras</span>
+                                    <span>Deviljho</span>
+                                    <span>Diablos</span>
+                            </div>
+                            <a href="#" id="redirecionamentoMonstros">See all monsters ></a>
                         </div>
-                        <a href="#">See all monsters ></a>
-                    </div>
-                    <div class="exemploArmaduras">
-                        <h1>Armaduras</h1>
-                        <hr>
-                        <h2>Exemplos:</h2>
-                        <div class="nomes">
-                            <span>Helms</span>
-                            <span>Chests</span>
-                            <span>Arms</span>
-                            <span>Waist</span>
-                            <span>Legs</span>
+                        <div class="exemplo">
+                            <div class="tituloExemplos">
+                                <h1>Armaduras</h1>
+                                <hr>
+                            </div>
+                            <h2>Exemplos:</h2>
+                            <div class="nomes">
+                                <span>Helms</span>
+                                <span>Chests</span>
+                                <span>Arms</span>
+                                <span>Waist</span>
+                                <span>Legs</span>
+                            </div>
+                            <a href="#" id="redirecionamentoArmaduras">See all armors ></a>
                         </div>
-                        <a href="#">See all armors ></a>
-                    </div>
-                    <div class="exemploArmas">
-                        <h1>Armas</h1>
-                        <hr>
-                        <h2>Exemplos:</h2>
-                        <div class="nomes">
-                            <span>Great Sword</span>
-                            <span>Sword & Shield</span>
-                            <span>Dual Blades</span>
-                            <span>Long Sword</span>
-                            <span>Hammer</span>
-                            <span>Hunting Horn</span>
-                            <span>Lance</span>
-                            <span>Gunlance</span>
-                            <span>Switch Axe</span>
-                            <span>Charge Blade</span>
-                            <span>Insect Glaive</span>
-                            <span>Bow</span>
-                            <span>Light Bowgun</span>
-                            <span>Heavy Bowgun</span>
+                        <div class="exemplo">
+                            <div class="tituloExemplos">
+                                <h1>Armas</h1>
+                                <hr>
+                            </div>
+                            <h2>Exemplos:</h2>
+                            <div class="nomes">
+                                <span>Great Sword</span>
+                                <span>Sword & Shield</span>
+                                <span>Dual Blades</span>
+                                <span>Long Sword</span>
+                                <span>Hammer</span>
+                                <span>Hunting Horn</span>
+                                <span>Lance</span>
+                                <span>Gunlance</span>
+                                <span>Switch Axe</span>
+                                <span>Charge Blade</span>
+                                <span>Insect Glaive</span>
+                                <span>Bow</span>
+                                <span>Light Bowgun</span>
+                                <span>Heavy Bowgun</span>
+                            </div>
+                            <a href="#" id="redirecionamentoArmas">See all weapons ></a>
                         </div>
-                        <a href="#">See all weapons ></a>
-                    </div>
                 </div>
             </div>
         </div>
