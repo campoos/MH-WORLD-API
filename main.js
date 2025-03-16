@@ -13,22 +13,40 @@ async function pesquisarDados(url) {
 
 // Função para substituir o conteúdo na tela
 function ReplaceDados(dados) {
+    const containerPrincipal = document.getElementById('containerPrincipal')
     const containerHome = document.getElementById('homeContainer');
     const newContaienr = document.createElement('div')
+    const linkVoltar = document.createElement('a')
+    const botaoVoltar = document.createElement('img')
+    
+    linkVoltar.className = "linkVoltar"
+    linkVoltar.href = "./index.html"
+
+    botaoVoltar.src = "./img/Reply Arrow.png"
+
+    linkVoltar.appendChild(botaoVoltar)
 
     newContaienr.id = 'newContainer'
     newContaienr.className = 'newContainer'
-    
-    // Limpa o conteúdo atual
-    containerHome.innerHTML = ""; 
 
-    containerHome.appendChild(newContaienr)
+    // Limpa o conteúdo atual
+    containerPrincipal.removeChild(containerHome)
+
+    containerPrincipal.appendChild(newContaienr)
+
+    newContaienr.appendChild(linkVoltar)
     
     // Cria um novo elemento para exibir os dados
     dados.forEach(item => {
+        const cards = document.createElement('div')
+        
+        cards.id = "card"
+        cards.className = "card"
+    
         const itemSpan = document.createElement('span');
         itemSpan.textContent = item.name
-        newContaienr.appendChild(itemSpan);
+        cards.appendChild(itemSpan);
+        newContaienr.appendChild(cards)
     });
 }
 
