@@ -86,70 +86,81 @@ function ReplaceDadosMonstros(dados) {
 // Função que exibe os dados do monstro em uma nova tela
 function loadMonsterData(monster) {
     const containerPrincipal = document.getElementById('containerPrincipal');
-    const newContainer = document.createElement('div');
+    const newContainerLoadMonster = document.createElement('div');
     const linkVoltar = document.createElement('a');
     const botaoVoltar = document.createElement('img');
 
     linkVoltar.className = "linkVoltar";
-    linkVoltar.href = "./index.html";  // Link para a tela anterior (agora você vai poder configurar a navegação corretamente)
+    linkVoltar.href = "./index.html";  // Link para a tela anterior
 
     // Botão de voltar com texto alternativo
     botaoVoltar.src = "./img/Reply Arrow.png";
-    botaoVoltar.alt = "Voltar para a tela de monstros";  // Adicionando o texto alternativo para a imagem
+    botaoVoltar.alt = "Voltar para a tela de monstros";  
     linkVoltar.appendChild(botaoVoltar);
 
-    newContainer.id = 'newContainer';
-    newContainer.className = 'newContainer';
+    newContainerLoadMonster.id = 'newContainerLoadMonster';
+    newContainerLoadMonster.className = 'newContainerLoadMonster';
 
     // Limpa o conteúdo atual
-    containerPrincipal.innerHTML = '';  // Limpa o conteúdo da tela
-    containerPrincipal.appendChild(newContainer);
+    containerPrincipal.innerHTML = '';  
+    containerPrincipal.appendChild(newContainerLoadMonster);
 
-    newContainer.appendChild(linkVoltar);
+    newContainerLoadMonster.appendChild(linkVoltar);
 
     // Nome do monstro
     const monsterName = document.createElement('h1');
     monsterName.textContent = monster.name;
-    newContainer.appendChild(monsterName);
+    newContainerLoadMonster.appendChild(monsterName);
 
     // Descrição do monstro
     const monsterDescription = document.createElement('h2');
     monsterDescription.textContent = "Description";
     const description = document.createElement('p');
     description.textContent = monster.description;
-    newContainer.appendChild(monsterDescription);
-    newContainer.appendChild(description);
+    newContainerLoadMonster.appendChild(monsterDescription);
+    newContainerLoadMonster.appendChild(description);
 
     // Resistências
     const resistancesContainer = document.createElement('div');
     resistancesContainer.className = 'resistancesContainer';
-    resistancesContainer.innerHTML = "<h3>Resistências</h3>";
+
+    const resistancesTitle = document.createElement('h3');
+    resistancesTitle.textContent = "Resistências";
+
+    const resistancesContent = document.createElement('div');
+    resistancesContent.className = 'resistancesContent';
 
     monster.resistances.forEach(resistance => {
         const resistanceItem = document.createElement('div');
         resistanceItem.className = 'resistanceItem';
-        
-        // Exibindo o nome do elemento de resistência
+
         const resistanceElement = document.createElement('span');
-        resistanceElement.textContent = `${resistance.element.charAt(0).toUpperCase() + resistance.element.slice(1)}`; // Capitaliza a primeira letra
+        resistanceElement.textContent = `${resistance.element.charAt(0).toUpperCase() + resistance.element.slice(1)}`;
+
         resistanceItem.appendChild(resistanceElement);
-        
-        // Se houver alguma condição, você pode exibi-la (caso esteja no seu JSON)
+
         if (resistance.condition) {
             const resistanceCondition = document.createElement('span');
             resistanceCondition.textContent = ` - Condition: ${resistance.condition}`;
             resistanceItem.appendChild(resistanceCondition);
         }
 
-        // Adiciona o item de resistência ao container de resistências
-        resistancesContainer.appendChild(resistanceItem);
+        resistancesContent.appendChild(resistanceItem);
     });
-    newContainer.appendChild(resistancesContainer);
+
+    resistancesContainer.appendChild(resistancesTitle);
+    resistancesContainer.appendChild(resistancesContent);
+    newContainerLoadMonster.appendChild(resistancesContainer);
 
     // Fraquezas
     const weaknessesContainer = document.createElement('div');
     weaknessesContainer.className = 'weaknessesContainer';
-    weaknessesContainer.innerHTML = "<h3>Fraquezas</h3>";
+
+    const weaknessesTitle = document.createElement('h3');
+    weaknessesTitle.textContent = "Fraquezas";
+
+    const weaknessesContent = document.createElement('div');
+    weaknessesContent.className = 'weaknessesContent';
 
     monster.weaknesses.forEach(weakness => {
         const weaknessItem = document.createElement('div');
@@ -157,7 +168,7 @@ function loadMonsterData(monster) {
 
         const weaknessIcon = document.createElement('img');
         weaknessIcon.className = 'weaknessIcon';
-        weaknessIcon.src = `./img/${weakness.element}_icon.webp`;  // Caminho para o ícone
+        weaknessIcon.src = `./img/${weakness.element}_icon.webp`;
 
         const weaknessValue = document.createElement('span');
         weaknessValue.className = 'weaknessValue';
@@ -166,10 +177,14 @@ function loadMonsterData(monster) {
         weaknessItem.appendChild(weaknessIcon);
         weaknessItem.appendChild(weaknessValue);
 
-        weaknessesContainer.appendChild(weaknessItem);
+        weaknessesContent.appendChild(weaknessItem);
     });
-    newContainer.appendChild(weaknessesContainer);
+
+    weaknessesContainer.appendChild(weaknessesTitle);
+    weaknessesContainer.appendChild(weaknessesContent);
+    newContainerLoadMonster.appendChild(weaknessesContainer);
 }
+
 
 // Função para substituir o conteúdo na tela (para armaduras)
 function ReplaceDadosArmaduras(dados) {
