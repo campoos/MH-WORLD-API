@@ -160,14 +160,14 @@ function ReplaceDadosArmas(dados) {
     const newContainer = document.createElement('div');
     const linkVoltar = document.createElement('a');
     const botaoVoltar = document.createElement('img');
-    
+
     linkVoltar.className = "linkVoltar";
     linkVoltar.href = "./index.html";
-    
+
     botaoVoltar.src = "./img/Reply Arrow.png";
-    
+
     linkVoltar.appendChild(botaoVoltar);
-    
+
     newContainer.id = 'newContainer';
     newContainer.className = 'newContainer';
 
@@ -177,19 +177,66 @@ function ReplaceDadosArmas(dados) {
 
     newContainer.appendChild(linkVoltar);
 
-    // Cria um novo elemento para exibir os dados
+    // Itera sobre os dados das armas
     dados.forEach(item => {
         const cards = document.createElement('div');
-        cards.id = "card";
         cards.className = "card";
 
+        // Nome da arma
         const itemSpan = document.createElement('a');
         itemSpan.textContent = item.name;
         itemSpan.href = '#';
         cards.appendChild(itemSpan);
+
+        // Container para durabilidade
+        const durabilityContainer = document.createElement('div');
+        durabilityContainer.className = 'durabilityContainer';
+
+        // Primeiro objeto do array durability (mínimo)
+        const minDurability = item.durability[0];
+
+        // Cores de durabilidade e seus valores
+        const colors = {
+            red: "#B14242",
+            orange: "#BA683D",
+            yellow: "#B79B47",
+            green: "#589445",
+            blue: "#5987B8",
+            white: "#ADADAD",
+            purple: "#AA65A2"
+        };
+
+        // Itera sobre as cores e seus valores corretamente
+        Object.entries(colors).forEach(([key, color]) => {
+            const durabilityItem = document.createElement('div');
+            durabilityItem.className = 'durabilityItem';
+
+            // Criar círculo colorido
+            const colorCircle = document.createElement('div');
+            colorCircle.className = 'colorCircle';
+            colorCircle.style.backgroundColor = color;
+
+            // Criar número da durabilidade
+            const durabilityValue = document.createElement('span');
+            durabilityValue.className = 'durabilityValue';
+            durabilityValue.textContent = minDurability[key]; // Corrigido para acessar a propriedade correta
+
+            // Adiciona o círculo e o número ao item
+            durabilityItem.appendChild(colorCircle);
+            durabilityItem.appendChild(durabilityValue);
+
+            // Adiciona o item ao container de durabilidade
+            durabilityContainer.appendChild(durabilityItem);
+        });
+
+        // Adiciona o container de durabilidade ao card
+        cards.appendChild(durabilityContainer);
+
+        // Adiciona o card ao novo container
         newContainer.appendChild(cards);
     });
 }
+
 
 // Funções específicas para cada seção (Monstros, Armas e Armaduras)
 async function telaMonstros() {

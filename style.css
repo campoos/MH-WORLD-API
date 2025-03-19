@@ -151,6 +151,30 @@ main {
     color: white;
 }
 
+.card .durabilityContainer {
+    display: flex;
+    margin-right: 2rem;
+    gap: 2rem;
+}
+
+.card .durabilityContainer .durabilityItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+}
+
+.card .durabilityContainer .durabilityItem .colorCircle {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+}
+
+.card .durabilityContainer .durabilityItem span {
+    color: white;
+}
+
+
 .conteudoHomeContainer {
     height: 90%;
     width: 80%;
