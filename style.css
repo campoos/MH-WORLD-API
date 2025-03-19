@@ -132,6 +132,25 @@ main {
     color: white;
 }
 
+.card .resistancesContainer {
+    display: flex;
+    margin-right: 2rem;
+    gap: 2rem;
+}
+
+.card .resistancesContainer img {
+    height: 1.5rem;
+}
+
+.card .resistancesContainer .resistenciaItem {
+    display: flex;
+    align-items: center;
+}
+
+.card .resistancesContainer .resistenciaItem span {
+    color: white;
+}
+
 .conteudoHomeContainer {
     height: 90%;
     width: 80%;
