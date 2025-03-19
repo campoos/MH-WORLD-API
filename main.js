@@ -185,7 +185,6 @@ function loadMonsterData(monster) {
     newContainerLoadMonster.appendChild(weaknessesContainer);
 }
 
-
 // Função para substituir o conteúdo na tela (para armaduras)
 function ReplaceDadosArmaduras(dados) {
     const containerPrincipal = document.getElementById('containerPrincipal');
@@ -219,7 +218,14 @@ function ReplaceDadosArmaduras(dados) {
         // Cria o nome da armadura com link
         const itemSpan = document.createElement('a');
         itemSpan.textContent = item.name;
-        itemSpan.href = "#";
+        
+        // Remove o 'href' e adiciona um evento de clique
+        itemSpan.href = "#"; // Manter para compatibilidade com navegadores antigos, mas o evento de clique substitui o comportamento padrão
+        itemSpan.addEventListener('click', function(event) {
+            event.preventDefault(); // Evita o comportamento de navegação padrão (não irá rolar para o topo)
+            loadArmorsData(item);  // Chama a função que carrega os dados da armadura
+        });
+
         cards.appendChild(itemSpan);
 
         // Cria uma div geral para as resistências
@@ -256,6 +262,120 @@ function ReplaceDadosArmaduras(dados) {
         newContainer.appendChild(cards);
     });
 }
+
+// Função que exibe os dados da armadura em uma nova tela
+function loadArmorsData(armor) {
+    const containerPrincipal = document.getElementById('containerPrincipal');
+    const newContainerLoadArmor = document.createElement('div');
+    const linkVoltar = document.createElement('a');
+    const botaoVoltar = document.createElement('img');
+
+    linkVoltar.className = "linkVoltar";
+    linkVoltar.href = "./index.html";  // Link para a tela anterior
+
+    // Botão de voltar com texto alternativo
+    botaoVoltar.src = "./img/Reply Arrow.png";
+    botaoVoltar.alt = "Voltar para a tela de armaduras";  
+    linkVoltar.appendChild(botaoVoltar);
+
+    newContainerLoadArmor.id = 'newContainerLoadArmor';
+    newContainerLoadArmor.className = 'newContainerLoadArmor';
+
+    // Limpa o conteúdo atual
+    containerPrincipal.innerHTML = '';  
+    containerPrincipal.appendChild(newContainerLoadArmor);
+
+    newContainerLoadArmor.appendChild(linkVoltar);
+
+    // Nome da armadura e tipo
+    const armorName = document.createElement('h1');
+    armorName.textContent = armor.name;
+    const armorType = document.createElement('span');
+    armorType.className = 'armorType';
+    armorType.textContent = `Type: ${armor.type}`;
+    newContainerLoadArmor.appendChild(armorName);
+    newContainerLoadArmor.appendChild(armorType);
+
+    // Criação da estrutura com descrição, defesa e materiais
+    const detailsContainer = document.createElement('div');
+    detailsContainer.className = 'detailsContainer';
+
+    // Div de descrição
+    const descriptionContainer = document.createElement('div');
+    descriptionContainer.className = 'descriptionContainer';
+    const descriptionTitle = document.createElement('h2');
+    descriptionTitle.textContent = "Description";
+    const descriptionText = document.createElement('p');
+    descriptionText.textContent = armor.skills[0] ? armor.skills[0].description : "No description available";
+    descriptionContainer.appendChild(descriptionTitle);
+    descriptionContainer.appendChild(descriptionText);
+
+    // Div de defesa
+    const defenseContainer = document.createElement('div');
+    defenseContainer.className = 'defenseContainer';
+    const defenseTitle = document.createElement('h3');
+    defenseTitle.textContent = "Defense";
+    const defenseText = document.createElement('p');
+    defenseText.textContent = `Base: ${armor.defense.base} | Max: ${armor.defense.max}`;
+    defenseContainer.appendChild(defenseTitle);
+    defenseContainer.appendChild(defenseText);
+
+    // Div de materiais
+    const materialsContainer = document.createElement('div');
+    materialsContainer.className = 'materialsContainer';
+    const materialsTitle = document.createElement('h3');
+    materialsTitle.textContent = "Materials";
+    const materialsList = document.createElement('ul');
+    armor.crafting.materials.forEach(material => {
+        const materialItem = document.createElement('li');
+        materialItem.textContent = `${material.quantity}x ${material.item.name}`;
+        materialsList.appendChild(materialItem);
+    });
+    materialsContainer.appendChild(materialsTitle);
+    materialsContainer.appendChild(materialsList);
+
+    // Adiciona as divs ao container de detalhes
+    detailsContainer.appendChild(descriptionContainer);
+    detailsContainer.appendChild(defenseContainer);
+    detailsContainer.appendChild(materialsContainer);
+
+    newContainerLoadArmor.appendChild(detailsContainer);
+
+    // Criação da seção de resistências
+    const resistancesContainer = document.createElement('div');
+    resistancesContainer.className = 'resistancesContainer';
+
+    const resistancesTitle = document.createElement('h3');
+    resistancesTitle.textContent = "Resistance";
+    const resistancesList = document.createElement('div');
+    resistancesList.className = 'resistancesList';
+
+    // Itera sobre as resistências e exibe o ícone e o valor
+    Object.keys(armor.resistances).forEach(element => {
+        const resistanceItem = document.createElement('div');
+        resistanceItem.className = 'resistanceItem';
+
+        // Criar o ícone do elemento (com o nome correto, ex: fogo_icon.png)
+        const elementIcon = document.createElement('img');
+        elementIcon.className = 'elementIcon';
+        elementIcon.src = `./img/${element}_icon.webp`;  // Caminho para o ícone baseado no nome do elemento
+
+        // Exibe o número da resistência
+        const resistanceValue = document.createElement('span');
+        resistanceValue.className = 'resistanceValue';
+        resistanceValue.textContent = armor.resistances[element];
+
+        resistanceItem.appendChild(elementIcon);
+        resistanceItem.appendChild(resistanceValue);
+
+        resistancesList.appendChild(resistanceItem);
+    });
+
+    resistancesContainer.appendChild(resistancesTitle);
+    resistancesContainer.appendChild(resistancesList);
+    newContainerLoadArmor.appendChild(resistancesContainer);
+}
+
 
 // Função para substituir o conteúdo na tela (para armas)
 function ReplaceDadosArmas(dados) {
