@@ -45,6 +45,7 @@ function ReplaceDadosMonstros(dados) {
         const itemSpan = document.createElement('a');
         itemSpan.textContent = item.name;
         itemSpan.href = "#";
+        itemSpan.addEventListener('click', () => loadMonsterData(item)); // Adiciona o evento de clique
         cards.appendChild(itemSpan);
 
         // Cria uma div geral para as fraquezas
@@ -80,6 +81,94 @@ function ReplaceDadosMonstros(dados) {
         // Adiciona o card ao novo container
         newContainer.appendChild(cards);
     });
+}
+
+// Função que exibe os dados do monstro em uma nova tela
+function loadMonsterData(monster) {
+    const containerPrincipal = document.getElementById('containerPrincipal');
+    const newContainer = document.createElement('div');
+    const linkVoltar = document.createElement('a');
+    const botaoVoltar = document.createElement('img');
+
+    linkVoltar.className = "linkVoltar";
+    linkVoltar.href = "./index.html";  // Link para a tela anterior (agora você vai poder configurar a navegação corretamente)
+
+    // Botão de voltar com texto alternativo
+    botaoVoltar.src = "./img/Reply Arrow.png";
+    botaoVoltar.alt = "Voltar para a tela de monstros";  // Adicionando o texto alternativo para a imagem
+    linkVoltar.appendChild(botaoVoltar);
+
+    newContainer.id = 'newContainer';
+    newContainer.className = 'newContainer';
+
+    // Limpa o conteúdo atual
+    containerPrincipal.innerHTML = '';  // Limpa o conteúdo da tela
+    containerPrincipal.appendChild(newContainer);
+
+    newContainer.appendChild(linkVoltar);
+
+    // Nome do monstro
+    const monsterName = document.createElement('h1');
+    monsterName.textContent = monster.name;
+    newContainer.appendChild(monsterName);
+
+    // Descrição do monstro
+    const monsterDescription = document.createElement('h2');
+    monsterDescription.textContent = "Description";
+    const description = document.createElement('p');
+    description.textContent = monster.description;
+    newContainer.appendChild(monsterDescription);
+    newContainer.appendChild(description);
+
+    // Resistências
+    const resistancesContainer = document.createElement('div');
+    resistancesContainer.className = 'resistancesContainer';
+    resistancesContainer.innerHTML = "<h3>Resistências</h3>";
+
+    monster.resistances.forEach(resistance => {
+        const resistanceItem = document.createElement('div');
+        resistanceItem.className = 'resistanceItem';
+        
+        // Exibindo o nome do elemento de resistência
+        const resistanceElement = document.createElement('span');
+        resistanceElement.textContent = `${resistance.element.charAt(0).toUpperCase() + resistance.element.slice(1)}`; // Capitaliza a primeira letra
+        resistanceItem.appendChild(resistanceElement);
+        
+        // Se houver alguma condição, você pode exibi-la (caso esteja no seu JSON)
+        if (resistance.condition) {
+            const resistanceCondition = document.createElement('span');
+            resistanceCondition.textContent = ` - Condition: ${resistance.condition}`;
+            resistanceItem.appendChild(resistanceCondition);
+        }
+
+        // Adiciona o item de resistência ao container de resistências
+        resistancesContainer.appendChild(resistanceItem);
+    });
+    newContainer.appendChild(resistancesContainer);
+
+    // Fraquezas
+    const weaknessesContainer = document.createElement('div');
+    weaknessesContainer.className = 'weaknessesContainer';
+    weaknessesContainer.innerHTML = "<h3>Fraquezas</h3>";
+
+    monster.weaknesses.forEach(weakness => {
+        const weaknessItem = document.createElement('div');
+        weaknessItem.className = 'weaknessItem';
+
+        const weaknessIcon = document.createElement('img');
+        weaknessIcon.className = 'weaknessIcon';
+        weaknessIcon.src = `./img/${weakness.element}_icon.webp`;  // Caminho para o ícone
+
+        const weaknessValue = document.createElement('span');
+        weaknessValue.className = 'weaknessValue';
+        weaknessValue.textContent = weakness.stars;
+
+        weaknessItem.appendChild(weaknessIcon);
+        weaknessItem.appendChild(weaknessValue);
+
+        weaknessesContainer.appendChild(weaknessItem);
+    });
+    newContainer.appendChild(weaknessesContainer);
 }
 
 // Função para substituir o conteúdo na tela (para armaduras)
