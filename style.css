@@ -295,8 +295,9 @@ main {
 }
 
 .newContainerLoadArmor .detailsContainer {
-    width: 90%;
+    width: 83%;
     display: flex;
+    justify-content: space-between;
     margin-top: 5rem;
     margin-left: 5rem;
 }
@@ -307,7 +308,6 @@ main {
 }
 
 .newContainerLoadArmor .detailsContainer .defenseContainer {
-    margin-left: 5rem;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -315,7 +315,6 @@ main {
 }
 
 .newContainerLoadArmor .detailsContainer .materialsContainer {
-    margin-left: 15rem;
     display: flex;
     flex-direction: column;
     color: white;
