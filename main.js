@@ -409,7 +409,11 @@ function ReplaceDadosArmas(dados) {
         // Nome da arma
         const itemSpan = document.createElement('a');
         itemSpan.textContent = item.name;
-        itemSpan.href = '#';
+        itemSpan.href = '#'; // Não muda a página, apenas ativa o clique
+        itemSpan.addEventListener('click', (e) => {
+            e.preventDefault(); // Previne o comportamento padrão de redirecionamento
+            loadWeaponsData(item); // Chama a função de carregar os dados da arma
+        });
         cards.appendChild(itemSpan);
 
         // Container para durabilidade
@@ -460,6 +464,174 @@ function ReplaceDadosArmas(dados) {
         newContainer.appendChild(cards);
     });
 }
+
+function loadWeaponsData(weapon) {
+    const containerPrincipal = document.getElementById('containerPrincipal');
+    const newContainerLoadWeapon = document.createElement('div');
+    const linkVoltar = document.createElement('a');
+    const botaoVoltar = document.createElement('img');
+
+    // Criar link de voltar
+    linkVoltar.className = "linkVoltar";
+    linkVoltar.href = "./index.html";
+    botaoVoltar.src = "./img/Reply Arrow.png";
+    linkVoltar.appendChild(botaoVoltar);
+
+    // Criar container principal da arma
+    newContainerLoadWeapon.id = 'newContainerLoadWeapon';
+    newContainerLoadWeapon.className = 'newContainerLoadWeapon';
+
+    // Limpar conteúdo atual e adicionar novo container
+    containerPrincipal.innerHTML = '';
+    containerPrincipal.appendChild(newContainerLoadWeapon);
+
+    // Adicionar link de voltar
+    newContainerLoadWeapon.appendChild(linkVoltar);
+
+    // Título com o nome da arma
+    const weaponName = document.createElement('h1');
+    weaponName.textContent = weapon.name;
+    newContainerLoadWeapon.appendChild(weaponName);
+
+    // Criar div geral com materiais e stats
+    const infoContainer = document.createElement('div');
+    infoContainer.className = 'infoContainer';
+
+    // Div de materiais de crafting ou upgrade
+    const materialsDiv = document.createElement('div');
+    materialsDiv.className = 'materialsDiv';
+    const materialsTitle = document.createElement('h3');
+    materialsTitle.textContent = 'Materials';
+    materialsDiv.appendChild(materialsTitle);
+
+    // Verificar se há upgrade materials ou crafting materials
+    const materialsToDisplay = weapon.crafting.craftable ? weapon.crafting.craftingMaterials : weapon.crafting.upgradeMaterials;
+    
+    materialsToDisplay.forEach(material => {
+        const matItem = document.createElement('p');
+        matItem.textContent = `${material.quantity}x ${material.item.name}`; // Adicionando quantidade antes do nome
+        materialsDiv.appendChild(matItem);
+    });
+
+    // Tabela de stats
+    const statsTable = document.createElement('div');
+    statsTable.className = 'statsTable';
+
+    const damage = document.createElement('div');
+    damage.className = 'damage';
+    const damageLabel = document.createElement('strong');
+    damageLabel.textContent = 'Damage:';
+    const damageValue = document.createElement('span');
+    damageValue.textContent = weapon.attack.display;
+    damage.appendChild(damageLabel);
+    damage.appendChild(damageValue);
+
+    const rarity = document.createElement('div');
+    rarity.className = 'rarity';
+    const rarityLabel = document.createElement('strong');
+    rarityLabel.textContent = 'Rarity:';
+    const rarityValue = document.createElement('span');
+    rarityValue.textContent = weapon.rarity;
+    rarity.appendChild(rarityLabel);
+    rarity.appendChild(rarityValue);
+
+    const slots = document.createElement('div');
+    slots.className = 'slots';
+    const slotsLabel = document.createElement('strong');
+    slotsLabel.textContent = 'Slots:';
+    const slotsValue = document.createElement('span');
+    slotsValue.textContent = weapon.slots.length;
+    slots.appendChild(slotsLabel);
+    slots.appendChild(slotsValue);
+
+    statsTable.appendChild(damage);
+    statsTable.appendChild(rarity);
+    statsTable.appendChild(slots);
+
+    // Adicionar divs de materiais e stats
+    infoContainer.appendChild(materialsDiv);
+    infoContainer.appendChild(statsTable);
+    newContainerLoadWeapon.appendChild(infoContainer);
+
+    // Criar container para durabilidade
+    const durabilityContainer = document.createElement('div');
+    durabilityContainer.className = 'durabilityContainer';
+
+    // Definir as cores para durabilidade
+    const colors = {
+        red: "#B14242",
+        orange: "#BA683D",
+        yellow: "#B79B47",
+        green: "#589445",
+        blue: "#5987B8",
+        white: "#ADADAD",
+        purple: "#AA65A2"
+    };
+
+    // Criar div para durabilidade mínima
+    const minDurabilityDiv = document.createElement('div');
+    minDurabilityDiv.className = 'minDurability';
+    const minDurability = weapon.durability[0]; // A primeira durabilidade do array (mínima)
+    Object.entries(colors).forEach(([key, color]) => {
+        const durabilityItem = document.createElement('div');
+        durabilityItem.className = 'durabilityItem';
+
+        // Criar círculo colorido
+        const colorCircle = document.createElement('div');
+        colorCircle.className = 'colorCircle';
+        colorCircle.style.backgroundColor = color;
+
+        // Criar número da durabilidade
+        const durabilityValue = document.createElement('span');
+        durabilityValue.className = 'durabilityValue';
+        durabilityValue.textContent = minDurability[key] || 0;  // Exibir 0 se o valor não existir
+
+        // Adicionar círculo e número à durabilidade
+        durabilityItem.appendChild(colorCircle);
+        durabilityItem.appendChild(durabilityValue);
+        minDurabilityDiv.appendChild(durabilityItem);
+    });
+
+    // Criar div para durabilidade máxima
+    const maxDurabilityDiv = document.createElement('div');
+    maxDurabilityDiv.className = 'maxDurability';
+    const maxDurability = weapon.durability[weapon.durability.length - 1]; // O último item do array (máxima)
+    Object.entries(colors).forEach(([key, color]) => {
+        const durabilityItem = document.createElement('div');
+        durabilityItem.className = 'durabilityItem';
+
+        // Criar círculo colorido
+        const colorCircle = document.createElement('div');
+        colorCircle.className = 'colorCircle';
+        colorCircle.style.backgroundColor = color;
+
+        // Criar número da durabilidade
+        const durabilityValue = document.createElement('span');
+        durabilityValue.className = 'durabilityValue';
+        durabilityValue.textContent = maxDurability[key] || 0; // Exibir 0 se o valor não existir
+
+        // Adicionar círculo e número à durabilidade
+        durabilityItem.appendChild(colorCircle);
+        durabilityItem.appendChild(durabilityValue);
+        maxDurabilityDiv.appendChild(durabilityItem);
+    });
+
+    // Criar e adicionar títulos de durabilidade
+    const minDurabilityTitle = document.createElement('h3');
+    minDurabilityTitle.textContent = 'Durability Min.';
+    const maxDurabilityTitle = document.createElement('h3');
+    maxDurabilityTitle.textContent = 'Durability Max.';
+
+    // Adicionar títulos antes das divs de durabilidade
+    durabilityContainer.appendChild(minDurabilityTitle);
+    durabilityContainer.appendChild(minDurabilityDiv);
+    durabilityContainer.appendChild(maxDurabilityTitle);
+    durabilityContainer.appendChild(maxDurabilityDiv);
+
+    // Adicionar o container de durabilidade à tela
+    newContainerLoadWeapon.appendChild(durabilityContainer);
+}
+
 
 
 // Funções específicas para cada seção (Monstros, Armas e Armaduras)

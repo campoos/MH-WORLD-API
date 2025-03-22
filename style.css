@@ -268,6 +268,203 @@ main {
     font-size: 1.5rem;
 }
 
+.newContainerLoadArmor {
+    width: 100%;
+    height: 100%;
+    background-color: #1F1F1F;
+}
+
+.newContainerLoadArmor a img {
+    height: 3rem;
+    margin: 1rem;
+}
+
+.newContainerLoadArmor h1 {
+    font-size: 3rem;
+    color: white;
+    margin-top: 4rem;
+    text-decoration: underline;
+    margin-left: 5rem;
+    margin-bottom: 1rem;
+}
+
+.newContainerLoadArmor .armorType {
+    font-size: 1rem;
+    color: white;
+    margin-left: 5rem;
+}
+
+.newContainerLoadArmor .detailsContainer {
+    width: 90%;
+    display: flex;
+    margin-top: 5rem;
+    margin-left: 5rem;
+}
+
+.newContainerLoadArmor .detailsContainer .descriptionContainer {
+    width: 35%;
+    color: white;
+}
+
+.newContainerLoadArmor .detailsContainer .defenseContainer {
+    margin-left: 5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.newContainerLoadArmor .detailsContainer .materialsContainer {
+    margin-left: 15rem;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.newContainerLoadArmor .resistancesContainer h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 5rem;
+}
+
+.newContainerLoadArmor .resistancesContainer {
+    margin-top: 2rem;
+    margin-left: 5rem;
+}
+
+.newContainerLoadArmor .resistancesList {
+    background-color: #2F2F2F;
+    width: 90%;
+    height: 5.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 3rem;
+}
+
+.newContainerLoadArmor .resistancesList .resistanceItem img {
+    height: 2.5rem;
+}
+
+.newContainerLoadArmor .resistancesList .resistanceItem span {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.newContainerLoadWeapon {
+    width: 100%;
+    height: 100%;
+    background-color: #1F1F1F;
+}
+
+.newContainerLoadWeapon img {
+    height: 3rem;
+    margin: 1rem;
+}
+
+.newContainerLoadWeapon h1 {
+    font-size: 3rem;
+    color: white;
+    margin-top: 4rem;
+    text-decoration: underline;
+    margin-left: 5rem;
+    margin-bottom: 1rem;
+}
+
+.newContainerLoadWeapon .infoContainer {
+    width: 84%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5rem;
+    margin-top: 5rem;
+}
+
+.infoContainer .materialsDiv h3, .infoContainer .materialsDiv p {
+    color: white;
+}
+
+.infoContainer .statsTable {
+    display: flex;
+    height: 4rem;
+    background-color: #2F2F2F;
+}
+
+.statsTable strong {
+    background-color: #434343;
+    width: 8rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.statsTable span {
+    color: white;
+    margin: 0.5rem;
+}
+
+
+.statsTable .damage, .rarity, .slots {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newContainerLoadWeapon .durabilityContainer {
+    margin-left: 5rem;
+    margin-top: 5rem;
+}
+
+.newContainerLoadWeapon .minDurability {
+    background-color: #2F2F2F;
+    width: 90%;
+    height: 5.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 3rem;
+}
+
+.newContainerLoadWeapon .maxDurability {
+    background-color: #2F2F2F;
+    width: 90%;
+    height: 5.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 3rem;
+}
+
+.newContainerLoadWeapon .durabilityContainer h3 {
+    color: white;
+    margin-top: 2rem;
+}
+
+.newContainerLoadWeapon .durabilityContainer .durabilityItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.newContainerLoadWeapon .durabilityContainer .durabilityItem .colorCircle {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
+.newContainerLoadWeapon .durabilityContainer .durabilityItem span {
+    color: white;
+    font-size: 1rem;
+}
+
 .conteudoHomeContainer {
     height: 90%;
     width: 80%;
