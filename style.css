@@ -542,7 +542,67 @@ main {
 }
 
 #containerLoading #textLoading{
-    font-size: 36px;
+    font-size: 2.5rem;
     font-weight: 800;
     color: white;
+}
+
+@media(max-width: 375px){
+    html {
+        font-size: 14px;
+    }
+    main {
+        width: 90%;
+        height: 90%;
+    }
+    .conteudoBarraLateral h1{
+        font-size: 0.9rem;
+    }
+    .conteudoHomeContainer h1 {
+        font-size: 1rem;
+    }
+    .exemploNomes h2{
+        display: none;
+    }
+    .exemploNomes .nomes span{
+        display: none;
+    }
+    #containerLoading #textLoading{
+        font-size: 2rem;
+        font-weight: 800;
+    }
+    .newContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .newContainer .linkVoltar img {
+        height: 2.5rem;
+        margin-top: 2rem;
+    }
+    .card {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+        padding: 0.5rem;
+    }
+    .card a {
+        margin: 0;
+    }
+    .card .fraquezasContainer {
+        margin: 0;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 }
