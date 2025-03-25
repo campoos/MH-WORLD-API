@@ -4,14 +4,22 @@ const linkMonstros = document.getElementById('redirecionamentoMonstros');
 const linkArmas = document.getElementById('redirecionamentoArmas');
 const linkArmaduras = document.getElementById('redirecionamentoArmaduras');
 
-// Função para buscar os dados das APIs
+const lateralMonstros = document.getElementById('linkLateralMonstros');
+const lateralArmas = document.getElementById('linkLateralArmas');
+const lateralArmaduras = document.getElementById('linkLateralArmaduras');
+
 async function pesquisarDados(url) {
     const response = await fetch(url);
     const data = await response.json();
-    return data; // Retorna os dados da API
+    return data; 
 }
 
-// Função para substituir o conteúdo na tela (para monstros)
+function apagarContainer() {
+    const containerPrincipal = document.getElementById('containerPrincipal');
+
+    containerPrincipal.innerHTML = ""
+}
+
 function ReplaceDadosMonstros(dados) {
     const containerPrincipal = document.getElementById('containerPrincipal');
     const containerHome = document.getElementById('homeContainer');
@@ -29,61 +37,51 @@ function ReplaceDadosMonstros(dados) {
     newContainer.id = 'newContainer';
     newContainer.className = 'newContainer';
 
-    // Limpa o conteúdo atual
-    containerPrincipal.removeChild(containerHome);
+
+    apagarContainer()
     containerPrincipal.appendChild(newContainer);
 
     newContainer.appendChild(linkVoltar);
 
-    // Cria um novo elemento para exibir os dados
+
     dados.forEach(item => {
         const cards = document.createElement('div');
         cards.id = "card";
         cards.className = "card";
 
-        // Cria o nome do monstro com link
         const itemSpan = document.createElement('a');
         itemSpan.textContent = item.name;
         itemSpan.href = "#";
-        itemSpan.addEventListener('click', () => loadMonsterData(item)); // Adiciona o evento de clique
+        itemSpan.addEventListener('click', () => loadMonsterData(item)); 
         cards.appendChild(itemSpan);
-
-        // Cria uma div geral para as fraquezas
+   
         const fraquezasContainer = document.createElement('div');
-        fraquezasContainer.className = 'fraquezasContainer'; // Div geral para as fraquezas
+        fraquezasContainer.className = 'fraquezasContainer'; 
 
-        // Itera sobre as fraquezas e exibe o ícone e o número de fraqueza
         item.weaknesses.forEach(fraqueza => {
             const fraquezaItem = document.createElement('div');
             fraquezaItem.className = 'fraquezaItem';
 
-            // Criar o ícone do elemento (com o nome correto, ex: fogo_icon.png)
             const elementoIcon = document.createElement('img');
             elementoIcon.className = 'elementoIcon';
-            elementoIcon.src = `./img/${fraqueza.element}_icon.webp`; // Caminho para o ícone baseado no nome do elemento
+            elementoIcon.src = `./img/${fraqueza.element}_icon.webp`;
 
-            // Exibe o número da fraqueza
             const numeroFraqueza = document.createElement('span');
             numeroFraqueza.className = 'numeroFraqueza';
-            numeroFraqueza.textContent = `${fraqueza.stars}`; // Exibe o número de fraqueza (sem as estrelas)
+            numeroFraqueza.textContent = `${fraqueza.stars}`; 
 
-            // Adiciona o ícone e o número da fraqueza à fraqueza
             fraquezaItem.appendChild(elementoIcon);
             fraquezaItem.appendChild(numeroFraqueza);
 
-            // Adiciona a fraqueza ao container de fraquezas
             fraquezasContainer.appendChild(fraquezaItem);
         });
 
-        // Adiciona o container de fraquezas ao card
         cards.appendChild(fraquezasContainer);
 
-        // Adiciona o card ao novo container
         newContainer.appendChild(cards);
     });
 }
 
-// Função que exibe os dados do monstro em uma nova tela
 function loadMonsterData(monster) {
     const containerPrincipal = document.getElementById('containerPrincipal');
     const newContainerLoadMonster = document.createElement('div');
@@ -91,9 +89,8 @@ function loadMonsterData(monster) {
     const botaoVoltar = document.createElement('img');
 
     linkVoltar.className = "linkVoltar";
-    linkVoltar.href = "./index.html";  // Link para a tela anterior
+    linkVoltar.href = "./index.html"; 
 
-    // Botão de voltar com texto alternativo
     botaoVoltar.src = "./img/Reply Arrow.png";
     botaoVoltar.alt = "Voltar para a tela de monstros";  
     linkVoltar.appendChild(botaoVoltar);
@@ -101,18 +98,15 @@ function loadMonsterData(monster) {
     newContainerLoadMonster.id = 'newContainerLoadMonster';
     newContainerLoadMonster.className = 'newContainerLoadMonster';
 
-    // Limpa o conteúdo atual
-    containerPrincipal.innerHTML = '';  
+    apagarContainer()
     containerPrincipal.appendChild(newContainerLoadMonster);
 
     newContainerLoadMonster.appendChild(linkVoltar);
 
-    // Nome do monstro
     const monsterName = document.createElement('h1');
     monsterName.textContent = monster.name;
     newContainerLoadMonster.appendChild(monsterName);
 
-    // Descrição do monstro
     const monsterDescription = document.createElement('h2');
     monsterDescription.textContent = "Description";
     const description = document.createElement('p');
@@ -120,7 +114,6 @@ function loadMonsterData(monster) {
     newContainerLoadMonster.appendChild(monsterDescription);
     newContainerLoadMonster.appendChild(description);
 
-    // Resistências
     const resistancesContainer = document.createElement('div');
     resistancesContainer.className = 'resistancesContainer';
 
@@ -152,7 +145,6 @@ function loadMonsterData(monster) {
     resistancesContainer.appendChild(resistancesContent);
     newContainerLoadMonster.appendChild(resistancesContainer);
 
-    // Fraquezas
     const weaknessesContainer = document.createElement('div');
     weaknessesContainer.className = 'weaknessesContainer';
 
@@ -185,7 +177,6 @@ function loadMonsterData(monster) {
     newContainerLoadMonster.appendChild(weaknessesContainer);
 }
 
-// Função para substituir o conteúdo na tela (para armaduras)
 function ReplaceDadosArmaduras(dados) {
     const containerPrincipal = document.getElementById('containerPrincipal');
     const containerHome = document.getElementById('homeContainer');
@@ -203,67 +194,54 @@ function ReplaceDadosArmaduras(dados) {
     newContainer.id = 'newContainer';
     newContainer.className = 'newContainer';
 
-    // Limpa o conteúdo atual
-    containerPrincipal.removeChild(containerHome);
+    apagarContainer()
     containerPrincipal.appendChild(newContainer);
 
     newContainer.appendChild(linkVoltar);
 
-    // Cria um novo elemento para exibir os dados
     dados.forEach(item => {
         const cards = document.createElement('div');
         cards.id = "card";
         cards.className = "card";
 
-        // Cria o nome da armadura com link
         const itemSpan = document.createElement('a');
         itemSpan.textContent = item.name;
         
-        // Remove o 'href' e adiciona um evento de clique
-        itemSpan.href = "#"; // Manter para compatibilidade com navegadores antigos, mas o evento de clique substitui o comportamento padrão
+        itemSpan.href = "#"; 
         itemSpan.addEventListener('click', function(event) {
-            event.preventDefault(); // Evita o comportamento de navegação padrão (não irá rolar para o topo)
-            loadArmorsData(item);  // Chama a função que carrega os dados da armadura
+            event.preventDefault(); 
+            loadArmorsData(item); 
         });
 
         cards.appendChild(itemSpan);
 
-        // Cria uma div geral para as resistências
         const resistancesContainer = document.createElement('div');
-        resistancesContainer.className = 'resistancesContainer'; // Div geral para as resistências
+        resistancesContainer.className = 'resistancesContainer'; 
 
-        // Itera sobre as resistências e exibe o ícone e o número de resistência
         Object.keys(item.resistances).forEach(element => {
             const resistenciaItem = document.createElement('div');
             resistenciaItem.className = 'resistenciaItem';
 
-            // Criar o ícone do elemento (com o nome correto, ex: fogo_icon.png)
             const elementoIcon = document.createElement('img');
             elementoIcon.className = 'elementoIcon';
-            elementoIcon.src = `./img/${element}_icon.webp`; // Caminho para o ícone baseado no nome do elemento
+            elementoIcon.src = `./img/${element}_icon.webp`; 
 
-            // Exibe o número da resistência
             const numeroResistencia = document.createElement('span');
             numeroResistencia.className = 'numeroResistencia';
-            numeroResistencia.textContent = `${item.resistances[element]}`; // Exibe o número de resistência
+            numeroResistencia.textContent = `${item.resistances[element]}`;
 
-            // Adiciona o ícone e o número da resistência à resistência
             resistenciaItem.appendChild(elementoIcon);
             resistenciaItem.appendChild(numeroResistencia);
 
-            // Adiciona a resistência ao container de resistências
             resistancesContainer.appendChild(resistenciaItem);
         });
 
-        // Adiciona o container de resistências ao card
         cards.appendChild(resistancesContainer);
 
-        // Adiciona o card ao novo container
         newContainer.appendChild(cards);
     });
 }
 
-// Função que exibe os dados da armadura em uma nova tela
 function loadArmorsData(armor) {
     const containerPrincipal = document.getElementById('containerPrincipal');
     const newContainerLoadArmor = document.createElement('div');
@@ -271,9 +249,8 @@ function loadArmorsData(armor) {
     const botaoVoltar = document.createElement('img');
 
     linkVoltar.className = "linkVoltar";
-    linkVoltar.href = "./index.html";  // Link para a tela anterior
+    linkVoltar.href = "./index.html"; 
 
-    // Botão de voltar com texto alternativo
     botaoVoltar.src = "./img/Reply Arrow.png";
     botaoVoltar.alt = "Voltar para a tela de armaduras";  
     linkVoltar.appendChild(botaoVoltar);
@@ -281,13 +258,11 @@ function loadArmorsData(armor) {
     newContainerLoadArmor.id = 'newContainerLoadArmor';
     newContainerLoadArmor.className = 'newContainerLoadArmor';
 
-    // Limpa o conteúdo atual
-    containerPrincipal.innerHTML = '';  
+    apagarContainer()
     containerPrincipal.appendChild(newContainerLoadArmor);
 
     newContainerLoadArmor.appendChild(linkVoltar);
 
-    // Nome da armadura e tipo
     const armorName = document.createElement('h1');
     armorName.textContent = armor.name;
     const armorType = document.createElement('span');
@@ -296,11 +271,9 @@ function loadArmorsData(armor) {
     newContainerLoadArmor.appendChild(armorName);
     newContainerLoadArmor.appendChild(armorType);
 
-    // Criação da estrutura com descrição, defesa e materiais
     const detailsContainer = document.createElement('div');
     detailsContainer.className = 'detailsContainer';
 
-    // Div de descrição
     const descriptionContainer = document.createElement('div');
     descriptionContainer.className = 'descriptionContainer';
     const descriptionTitle = document.createElement('h2');
@@ -310,7 +283,6 @@ function loadArmorsData(armor) {
     descriptionContainer.appendChild(descriptionTitle);
     descriptionContainer.appendChild(descriptionText);
 
-    // Div de defesa
     const defenseContainer = document.createElement('div');
     defenseContainer.className = 'defenseContainer';
     const defenseTitle = document.createElement('h3');
@@ -320,7 +292,6 @@ function loadArmorsData(armor) {
     defenseContainer.appendChild(defenseTitle);
     defenseContainer.appendChild(defenseText);
 
-    // Div de materiais
     const materialsContainer = document.createElement('div');
     materialsContainer.className = 'materialsContainer';
     const materialsTitle = document.createElement('h3');
@@ -334,14 +305,12 @@ function loadArmorsData(armor) {
     materialsContainer.appendChild(materialsTitle);
     materialsContainer.appendChild(materialsList);
 
-    // Adiciona as divs ao container de detalhes
     detailsContainer.appendChild(descriptionContainer);
     detailsContainer.appendChild(defenseContainer);
     detailsContainer.appendChild(materialsContainer);
 
     newContainerLoadArmor.appendChild(detailsContainer);
 
-    // Criação da seção de resistências
     const resistancesContainer = document.createElement('div');
     resistancesContainer.className = 'resistancesContainer';
 
@@ -350,17 +319,14 @@ function loadArmorsData(armor) {
     const resistancesList = document.createElement('div');
     resistancesList.className = 'resistancesList';
 
-    // Itera sobre as resistências e exibe o ícone e o valor
     Object.keys(armor.resistances).forEach(element => {
         const resistanceItem = document.createElement('div');
         resistanceItem.className = 'resistanceItem';
 
-        // Criar o ícone do elemento (com o nome correto, ex: fogo_icon.png)
         const elementIcon = document.createElement('img');
         elementIcon.className = 'elementIcon';
-        elementIcon.src = `./img/${element}_icon.webp`;  // Caminho para o ícone baseado no nome do elemento
+        elementIcon.src = `./img/${element}_icon.webp`;
 
-        // Exibe o número da resistência
         const resistanceValue = document.createElement('span');
         resistanceValue.className = 'resistanceValue';
         resistanceValue.textContent = armor.resistances[element];
@@ -376,8 +342,6 @@ function loadArmorsData(armor) {
     newContainerLoadArmor.appendChild(resistancesContainer);
 }
 
-
-// Função para substituir o conteúdo na tela (para armas)
 function ReplaceDadosArmas(dados) {
     const containerPrincipal = document.getElementById('containerPrincipal');
     const containerHome = document.getElementById('homeContainer');
@@ -395,35 +359,29 @@ function ReplaceDadosArmas(dados) {
     newContainer.id = 'newContainer';
     newContainer.className = 'newContainer';
 
-    // Limpa o conteúdo atual
-    containerPrincipal.removeChild(containerHome);
+    apagarContainer()
     containerPrincipal.appendChild(newContainer);
 
     newContainer.appendChild(linkVoltar);
 
-    // Itera sobre os dados das armas
     dados.forEach(item => {
         const cards = document.createElement('div');
         cards.className = "card";
 
-        // Nome da arma
         const itemSpan = document.createElement('a');
         itemSpan.textContent = item.name;
-        itemSpan.href = '#'; // Não muda a página, apenas ativa o clique
+        itemSpan.href = '#'; 
         itemSpan.addEventListener('click', (e) => {
-            e.preventDefault(); // Previne o comportamento padrão de redirecionamento
-            loadWeaponsData(item); // Chama a função de carregar os dados da arma
+            e.preventDefault();
+            loadWeaponsData(item);
         });
         cards.appendChild(itemSpan);
 
-        // Container para durabilidade
         const durabilityContainer = document.createElement('div');
         durabilityContainer.className = 'durabilityContainer';
 
-        // Primeiro objeto do array durability (mínimo)
         const minDurability = item.durability[0];
 
-        // Cores de durabilidade e seus valores
         const colors = {
             red: "#B14242",
             orange: "#BA683D",
@@ -434,33 +392,26 @@ function ReplaceDadosArmas(dados) {
             purple: "#AA65A2"
         };
 
-        // Itera sobre as cores e seus valores corretamente
         Object.entries(colors).forEach(([key, color]) => {
             const durabilityItem = document.createElement('div');
             durabilityItem.className = 'durabilityItem';
 
-            // Criar círculo colorido
             const colorCircle = document.createElement('div');
             colorCircle.className = 'colorCircle';
             colorCircle.style.backgroundColor = color;
 
-            // Criar número da durabilidade
             const durabilityValue = document.createElement('span');
             durabilityValue.className = 'durabilityValue';
-            durabilityValue.textContent = minDurability[key]; // Corrigido para acessar a propriedade correta
+            durabilityValue.textContent = minDurability[key]; 
 
-            // Adiciona o círculo e o número ao item
             durabilityItem.appendChild(colorCircle);
             durabilityItem.appendChild(durabilityValue);
 
-            // Adiciona o item ao container de durabilidade
             durabilityContainer.appendChild(durabilityItem);
         });
 
-        // Adiciona o container de durabilidade ao card
         cards.appendChild(durabilityContainer);
 
-        // Adiciona o card ao novo container
         newContainer.appendChild(cards);
     });
 }
@@ -471,49 +422,40 @@ function loadWeaponsData(weapon) {
     const linkVoltar = document.createElement('a');
     const botaoVoltar = document.createElement('img');
 
-    // Criar link de voltar
     linkVoltar.className = "linkVoltar";
     linkVoltar.href = "./index.html";
     botaoVoltar.src = "./img/Reply Arrow.png";
     linkVoltar.appendChild(botaoVoltar);
 
-    // Criar container principal da arma
     newContainerLoadWeapon.id = 'newContainerLoadWeapon';
     newContainerLoadWeapon.className = 'newContainerLoadWeapon';
 
-    // Limpar conteúdo atual e adicionar novo container
-    containerPrincipal.innerHTML = '';
+    apagarContainer()
     containerPrincipal.appendChild(newContainerLoadWeapon);
 
-    // Adicionar link de voltar
     newContainerLoadWeapon.appendChild(linkVoltar);
 
-    // Título com o nome da arma
     const weaponName = document.createElement('h1');
     weaponName.textContent = weapon.name;
     newContainerLoadWeapon.appendChild(weaponName);
 
-    // Criar div geral com materiais e stats
     const infoContainer = document.createElement('div');
     infoContainer.className = 'infoContainer';
 
-    // Div de materiais de crafting ou upgrade
     const materialsDiv = document.createElement('div');
     materialsDiv.className = 'materialsDiv';
     const materialsTitle = document.createElement('h3');
     materialsTitle.textContent = 'Materials';
     materialsDiv.appendChild(materialsTitle);
 
-    // Verificar se há upgrade materials ou crafting materials
     const materialsToDisplay = weapon.crafting.craftable ? weapon.crafting.craftingMaterials : weapon.crafting.upgradeMaterials;
     
     materialsToDisplay.forEach(material => {
         const matItem = document.createElement('p');
-        matItem.textContent = `${material.quantity}x ${material.item.name}`; // Adicionando quantidade antes do nome
+        matItem.textContent = `${material.quantity}x ${material.item.name}`; 
         materialsDiv.appendChild(matItem);
     });
 
-    // Tabela de stats
     const statsTable = document.createElement('div');
     statsTable.className = 'statsTable';
 
@@ -548,16 +490,13 @@ function loadWeaponsData(weapon) {
     statsTable.appendChild(rarity);
     statsTable.appendChild(slots);
 
-    // Adicionar divs de materiais e stats
     infoContainer.appendChild(materialsDiv);
     infoContainer.appendChild(statsTable);
     newContainerLoadWeapon.appendChild(infoContainer);
 
-    // Criar container para durabilidade
     const durabilityContainer = document.createElement('div');
     durabilityContainer.className = 'durabilityContainer';
 
-    // Definir as cores para durabilidade
     const colors = {
         red: "#B14242",
         orange: "#BA683D",
@@ -568,89 +507,128 @@ function loadWeaponsData(weapon) {
         purple: "#AA65A2"
     };
 
-    // Criar div para durabilidade mínima
     const minDurabilityDiv = document.createElement('div');
     minDurabilityDiv.className = 'minDurability';
-    const minDurability = weapon.durability[0]; // A primeira durabilidade do array (mínima)
+    const minDurability = weapon.durability[0];
     Object.entries(colors).forEach(([key, color]) => {
         const durabilityItem = document.createElement('div');
         durabilityItem.className = 'durabilityItem';
 
-        // Criar círculo colorido
         const colorCircle = document.createElement('div');
         colorCircle.className = 'colorCircle';
         colorCircle.style.backgroundColor = color;
 
-        // Criar número da durabilidade
         const durabilityValue = document.createElement('span');
         durabilityValue.className = 'durabilityValue';
-        durabilityValue.textContent = minDurability[key] || 0;  // Exibir 0 se o valor não existir
+        durabilityValue.textContent = minDurability[key] || 0; 
 
-        // Adicionar círculo e número à durabilidade
         durabilityItem.appendChild(colorCircle);
         durabilityItem.appendChild(durabilityValue);
         minDurabilityDiv.appendChild(durabilityItem);
     });
 
-    // Criar div para durabilidade máxima
     const maxDurabilityDiv = document.createElement('div');
     maxDurabilityDiv.className = 'maxDurability';
-    const maxDurability = weapon.durability[weapon.durability.length - 1]; // O último item do array (máxima)
+    const maxDurability = weapon.durability[weapon.durability.length - 1]; 
     Object.entries(colors).forEach(([key, color]) => {
         const durabilityItem = document.createElement('div');
         durabilityItem.className = 'durabilityItem';
 
-        // Criar círculo colorido
         const colorCircle = document.createElement('div');
         colorCircle.className = 'colorCircle';
         colorCircle.style.backgroundColor = color;
 
-        // Criar número da durabilidade
         const durabilityValue = document.createElement('span');
         durabilityValue.className = 'durabilityValue';
-        durabilityValue.textContent = maxDurability[key] || 0; // Exibir 0 se o valor não existir
+        durabilityValue.textContent = maxDurability[key] || 0; 
 
-        // Adicionar círculo e número à durabilidade
         durabilityItem.appendChild(colorCircle);
         durabilityItem.appendChild(durabilityValue);
         maxDurabilityDiv.appendChild(durabilityItem);
     });
 
-    // Criar e adicionar títulos de durabilidade
     const minDurabilityTitle = document.createElement('h3');
     minDurabilityTitle.textContent = 'Durability Min.';
     const maxDurabilityTitle = document.createElement('h3');
     maxDurabilityTitle.textContent = 'Durability Max.';
 
-    // Adicionar títulos antes das divs de durabilidade
     durabilityContainer.appendChild(minDurabilityTitle);
     durabilityContainer.appendChild(minDurabilityDiv);
     durabilityContainer.appendChild(maxDurabilityTitle);
     durabilityContainer.appendChild(maxDurabilityDiv);
 
-    // Adicionar o container de durabilidade à tela
     newContainerLoadWeapon.appendChild(durabilityContainer);
 }
 
-
-
-// Funções específicas para cada seção (Monstros, Armas e Armaduras)
 async function telaMonstros() {
     const dadosMonstros = await pesquisarDados("https://mhw-db.com/monsters");
-    ReplaceDadosMonstros(dadosMonstros); // Exibe os dados de monstros
+    ReplaceDadosMonstros(dadosMonstros);
 }
 
 async function telaArmas() {
     const dadosArmas = await pesquisarDados("https://mhw-db.com/weapons");
-    ReplaceDadosArmas(dadosArmas); // Exibe os dados de armas
+    ReplaceDadosArmas(dadosArmas); 
 }
 
 async function telaArmaduras() {
     const dadosArmaduras = await pesquisarDados("https://mhw-db.com/armor");
-    ReplaceDadosArmaduras(dadosArmaduras); // Exibe os dados de armaduras
+    ReplaceDadosArmaduras(dadosArmaduras); 
 }
 
-// Eventos para os links
-linkMonstros.addEventListener('click', telaMonstros);
-linkArmas.addEventListener('click', telaArmas);
-linkArmaduras.addEventListener('click', telaArmaduras);
+async function redirecionamentoBarraLateral(tipo) {
+    const containerPrincipal = document.getElementById('containerPrincipal');
+
+    containerPrincipal.innerHTML = "";
+
+    const containerLoading = document.createElement('div');
+    containerLoading.id = "containerLoading";
+
+    const textLoading = document.createElement('p');
+    textLoading.id = "textLoading";
+    textLoading.textContent = "Loading...";
+
+    containerLoading.appendChild(textLoading);
+    containerPrincipal.appendChild(containerLoading); 
+
+    if (tipo === 'monstros') {
+        await telaMonstros();
+    } else if (tipo === 'armas') {
+        await telaArmas();
+    } else if (tipo === 'armaduras') {
+        await telaArmaduras();
+    }
+
+    containerLoading.remove();
+}
+
+linkMonstros.addEventListener('click', (event) => {
+    event.preventDefault(); 
+    redirecionamentoBarraLateral("monstros");
+});
+
+linkArmaduras.addEventListener('click', (event) => {
+    event.preventDefault();
+    redirecionamentoBarraLateral("armaduras");
+});
+
+linkArmas.addEventListener('click', (event) => {
+    event.preventDefault();
+    redirecionamentoBarraLateral("armas");
+});
+
+
+
+lateralMonstros.addEventListener('click', (event) => {
+    event.preventDefault(); 
+    redirecionamentoBarraLateral("monstros");
+});
+
+lateralArmaduras.addEventListener('click', (event) => {
+    event.preventDefault();
+    redirecionamentoBarraLateral("armaduras");
+});
+
+lateralArmas.addEventListener('click', (event) => {
+    event.preventDefault();
+    redirecionamentoBarraLateral("armas");
+});

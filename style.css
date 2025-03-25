@@ -532,3 +532,17 @@ main {
 .exemploNomes .exemplo a {
     color: #1E74D7;
 }
+
+#containerLoading {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#containerLoading #textLoading{
+    font-size: 36px;
+    font-weight: 800;
+    color: white;
+}
